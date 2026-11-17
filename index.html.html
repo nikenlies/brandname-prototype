@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Brandname — Fragrance House & Ingredients Supply (prototype)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --ivory:#f7f2e8;--champagne:#e9dcc3;--beige:#efe6d4;--charcoal:#2a2724;--gold:#a8884a;--green:#2f4a3a;--olive:#7a7d52;
+  --bg:var(--ivory);--ink:var(--charcoal);--muted:#6b645a;--line:#d9ceb8;--card:#fbf8f1;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#171614;--ink:#efe9dc;--muted:#a79f90;--line:#38342e;--card:#1f1d1a;--champagne:#3a3326;--beige:#26231e;--gold:#c6a661;--green:#8fb59b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#171614;--ink:#efe9dc;--muted:#a79f90;--line:#38342e;--card:#1f1d1a;--champagne:#3a3326;--beige:#26231e;--gold:#c6a661;--green:#8fb59b;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+a{color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.08;margin:0}
+h2{font-size:clamp(2rem,4.5vw,3.1rem)}
+h3{font-size:1.5rem}
+p{margin:0}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.btn{display:inline-block;padding:14px 26px;font:500 .95rem var(--sans);text-decoration:none;border:1px solid currentColor;cursor:pointer;background:none;color:inherit;transition:background .2s,color .2s}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#1d1a16}
+.btn.gold:hover{background:transparent;color:var(--gold)}
+.btn.green{background:var(--green);border-color:var(--green);color:#f7f2e8}
+.btn.green:hover{background:transparent;color:var(--green)}
+:root[data-theme="dark"] .btn.green,:root:not([data-theme="light"]) .btn.green{color:#12201a}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{font:600 1.45rem var(--serif);letter-spacing:.14em;text-decoration:none}
+nav{display:flex;gap:22px;font-size:.9rem;align-items:center}
+nav a{text-decoration:none;color:var(--muted)}nav a:hover{color:var(--ink)}
+@media(max-width:720px){nav .opt{display:none}nav{gap:14px}}
+
+/* split hero */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 64px);min-height:calc(100svh - 64px)}
+.half{position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:56px clamp(24px,4vw,64px);overflow:hidden;text-decoration:none}
+.half.frag{background:linear-gradient(160deg,#efe3c8,#d9c59a);color:#2a2724}
+.half.ing{background:#2f4a3a;color:#f1ecdf}
+.half svg{position:absolute;right:8%;top:10%;width:46%;max-width:260px;opacity:.9}
+.half h2{font-size:clamp(2.2rem,4.4vw,3.6rem);margin-bottom:12px;max-width:11ch}
+.half p{max-width:34ch;margin-bottom:26px;opacity:.88}
+.half .btn:hover{background:currentColor}
+.half .btn span{mix-blend-mode:normal}
+.frag .btn:hover{background:#2a2724;color:#efe3c8}
+.ing .btn:hover{background:#f1ecdf;color:#2f4a3a}
+.lead{padding:96px 0 40px;text-align:center}
+.lead h1{font-size:clamp(2.6rem,6.5vw,5rem);max-width:15ch;margin:0 auto 20px}
+.lead p{max-width:56ch;margin:0 auto;color:var(--muted);font-size:1.1rem}
+@media(max-width:820px){.hero{grid-template-columns:1fr;min-height:0}.half{min-height:420px}}
+
+section{padding:88px 0}
+.head{max-width:620px;margin-bottom:44px}
+.head p{color:var(--muted);margin-top:14px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+@media(max-width:820px){.split{grid-template-columns:1fr;gap:40px}}
+.div-block{border-top:2px solid var(--gold);padding-top:24px}
+.div-block.g{border-color:var(--green)}
+.div-block h3{margin-bottom:10px}
+.div-block p{color:var(--muted);margin-bottom:18px}
+.div-block ul{padding:0;margin:0 0 24px;list-style:none}
+.div-block li{padding:9px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+
+.band{background:var(--beige)}
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.item{background:var(--card);border:1px solid var(--line);padding:22px;display:flex;flex-direction:column;gap:6px}
+.item .swatch{height:150px;margin:-22px -22px 14px;display:grid;place-items:center}
+.item small{color:var(--muted);font-size:.85rem}
+.item b{font:500 1.35rem var(--serif)}
+.item.g{border-radius:0}
+.item .tag{font-size:.8rem;color:var(--gold);margin-top:auto;padding-top:10px}
+.item.g .tag{color:var(--green)}
+
+.wholesale{background:var(--green);color:#f1ecdf}
+.wholesale .btn{color:#f1ecdf}.wholesale .btn:hover{background:#f1ecdf;color:var(--green)}
+.wholesale .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center}
+.wholesale p{opacity:.85;margin:16px 0 28px;max-width:46ch}
+.wholesale dl{margin:0;display:grid;gap:0}
+.wholesale dt{font:500 1.2rem var(--serif);padding-top:16px;border-top:1px solid rgba(241,236,223,.25)}
+.wholesale dd{margin:2px 0 16px;opacity:.78;font-size:.93rem}
+@media(max-width:820px){.wholesale .wrap{grid-template-columns:1fr;gap:32px}}
+
+.std{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px}
+.std div{border-left:2px solid var(--gold);padding-left:18px}
+.std h3{font-size:1.3rem;margin-bottom:6px}
+.std p{color:var(--muted);font-size:.95rem}
+
+.edu a{display:block;padding:20px 0;border-top:1px solid var(--line);text-decoration:none;display:flex;justify-content:space-between;gap:20px;align-items:baseline}
+.edu a:last-child{border-bottom:1px solid var(--line)}
+.edu a:hover b{color:var(--gold)}
+.edu b{font:500 1.4rem var(--serif)}
+.edu span{color:var(--muted);font-size:.9rem;text-align:right}
+@media(max-width:600px){.edu a{flex-direction:column;gap:4px}.edu span{text-align:left}}
+
+.news{background:var(--champagne)}
+.news .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+@media(max-width:820px){.news .wrap{grid-template-columns:1fr}}
+.news form{display:grid;gap:12px}
+.news .row{display:flex;gap:10px;flex-wrap:wrap}
+input,select{flex:1 1 200px;padding:14px;font:inherit;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:0}
+#msg{min-height:1.5em;font-size:.92rem;color:var(--muted)}
+
+footer{padding:64px 0 40px;border-top:1px solid var(--line)}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+@media(max-width:820px){.fgrid{grid-template-columns:1fr 1fr}}
+footer h4{font:600 .9rem var(--sans);margin:0 0 12px}
+footer a{display:block;text-decoration:none;color:var(--muted);font-size:.92rem;padding:3px 0}footer a:hover{color:var(--ink)}
+footer .fine{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+header .wrap{max-width:1360px}.hd{display:flex;gap:18px;align-items:center;margin-left:auto}#mn{display:flex;gap:6px;margin-left:28px}.dd{position:relative}.dd>a{display:block;padding:20px 10px;text-decoration:none;font-size:.9rem;color:var(--muted)}.dd:hover>a,.dd:focus-within>a{color:var(--ink)}
+.menu{display:none;position:absolute;top:64px;left:0;min-width:230px;background:var(--bg);border:1px solid var(--line);padding:10px 0;z-index:25}.dd:hover .menu,.dd:focus-within .menu{display:block}.menu a{display:block;padding:7px 20px;text-decoration:none;font-size:.88rem;color:var(--muted)}.menu a:hover{color:var(--gold)}
+.ut{display:flex;gap:14px;align-items:center;font-size:.88rem}.ut a{text-decoration:none;color:var(--muted)}.ut select,.ut input{flex:none;padding:6px;font-size:.85rem;width:auto}.ut input{width:120px}#bg{display:none;background:none;border:1px solid var(--line);padding:8px 12px;color:var(--ink);font:inherit}
+@media(max-width:1000px){#bg{display:block}#mn{display:none;position:absolute;top:64px;left:0;right:0;background:var(--bg);flex-direction:column;margin:0;padding:10px 24px;border-bottom:1px solid var(--line);max-height:75vh;overflow:auto}header.open #mn{display:flex}.dd>a{padding:10px 0;color:var(--ink)}.menu{display:block;position:static;border:0;padding:0 0 8px 12px}.ut .hide{display:none}}
+main:focus{outline:none}.lead.sm{padding:64px 24px 28px}.eye{display:block;letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;color:var(--gold);margin-bottom:14px}.g .eye{color:var(--green)}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}label{display:grid;gap:6px;font-size:.82rem;color:var(--muted)}label input,label select,textarea{flex:none;width:100%}textarea{font:inherit;padding:14px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:0}
+.cnt{color:var(--muted);font-size:.9rem;margin-bottom:20px}.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}.pc{background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column}.sw{height:210px;display:grid;place-items:center}.pcb{padding:18px;display:flex;flex-direction:column;gap:6px;flex:1}.pcb h3 a{text-decoration:none}.pcb small{color:var(--muted)}.pcb p{font-size:.92rem;color:var(--muted)}.lab{color:var(--gold)!important;font-size:.78rem}.pc.g .lab{color:var(--green)!important}.rt{color:var(--gold)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:12px}.acts .btn{padding:10px 14px;font-size:.85rem}.btn:disabled{opacity:.45;cursor:default}.hrt[aria-pressed=true]{background:var(--gold);color:#1d1a16}.btn.sz[aria-pressed=true]{background:var(--charcoal);color:var(--ivory)}
+.pd{display:grid;grid-template-columns:1fr 1fr;gap:56px;padding-top:48px;padding-bottom:64px}@media(max-width:820px){.pd{grid-template-columns:1fr}}.th{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}.th button{padding:0;border:1px solid var(--line);background:none}.pd h1{font-size:clamp(2.2rem,4vw,3.4rem)}fieldset{border:0;padding:0;margin:20px 0 0;display:flex;gap:8px;flex-wrap:wrap}legend{font-size:.82rem;color:var(--muted);margin-bottom:8px}
+.row2{display:flex;gap:16px;align-items:end;margin:16px 0}.row2 label{flex:0 0 120px}.tbl{width:100%;border-collapse:collapse;margin:18px 0}.tbl th,.tbl td{text-align:left;padding:10px 0;border-bottom:1px solid var(--line);font-size:.92rem;vertical-align:top}.tbl th{font-weight:500;width:42%;color:var(--muted)}.g .tbl th{color:var(--green)}.g h3{margin-top:24px;color:var(--green)}
+details{border-bottom:1px solid var(--line);padding:12px 0}summary{cursor:pointer;font-weight:500}details p{color:var(--muted);margin-top:8px;font-size:.92rem}
+.crow{display:grid;grid-template-columns:90px 1fr auto;gap:18px;padding:18px 0;border-top:1px solid var(--line);align-items:start}.crow .sw{height:90px}.lnk{background:none;border:0;padding:0;color:var(--gold);cursor:pointer;text-decoration:underline;font:inherit}.sum{border-top:2px solid var(--gold);padding-top:20px;display:grid;gap:10px;align-content:start}
+.fm{display:grid;gap:14px}.fm.two{grid-template-columns:1fr 1fr}.fm .full{grid-column:1/-1}@media(max-width:600px){.fm.two{grid-template-columns:1fr}}.fm h3{margin-top:12px}.ch{display:flex;gap:10px;align-items:center;color:var(--ink);font-size:.95rem}.ch input{width:auto;flex:none}.err{color:#a33;min-height:1.4em;font-size:.9rem}
+.tabs{display:flex;gap:22px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:28px;padding-bottom:10px}.tabs a{text-decoration:none;color:var(--muted)}.tabs a[aria-current=true]{color:var(--ink);border-bottom:2px solid var(--gold)}
+.art{max-width:720px!important;padding:80px 24px}.art h1{font-size:clamp(2.4rem,5vw,3.6rem);margin-bottom:28px}.dc::first-letter{font:500 4rem/.8 var(--serif);float:left;padding:6px 10px 0 0;color:var(--gold)}.art p{margin-bottom:18px;font-size:1.08rem}
+dialog{border:1px solid var(--line);background:var(--bg);color:var(--ink);max-width:420px;padding:28px}dialog::backdrop{background:rgba(0,0,0,.4)}#toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);background:var(--charcoal);color:var(--ivory);padding:12px 22px;opacity:0;transition:.25s;z-index:50;pointer-events:none}#toast.on{opacity:1;transform:translate(-50%,0)}.lead.g h1,.lead.g{color:var(--green)}
+</style></head><body><header><div class="wrap"><a class="logo" href="#/">BRANDNAME</a><nav id="mn" aria-label="Main"></nav><div class="hd ut"><form id="srch" role="search"><input id="sq" type="search" placeholder="Search" aria-label="Search fragrances"></form><label class="hide" style="display:block"><select id="cur" aria-label="Currency"></select></label><a href="#/account">Account</a><a href="#/wishlist">Wishlist (<span id="wc">0</span>)</a><a href="#/cart">Cart (<span id="cc">0</span>)</a><button id="bg" aria-label="Menu">Menu</button></div></div></header><main id="app" tabindex="-1"></main><footer id="contact">
+  <div class="wrap">
+    <div class="fgrid">
+      <div><a class="logo" href="#/" style="color:var(--ink);padding:0">BRANDNAME</a><p style="color:var(--muted);font-size:.92rem;margin-top:10px;max-width:30ch">A global destination for fragrance discovery and professional perfumery ingredients.</p></div>
+      <div><h4>Fragrance</h4><a href="#/shop">Shop all</a><a href="#/shop/inspired">Alternatives</a><a href="#/shop/single">Single-note</a><a href="#/shop/discovery">Discovery sets</a></div>
+      <div><h4>Ingredients</h4><a href="#/ingredients/essential">Essential oils</a><a href="#/ingredients/absolutes">Floral absolutes</a><a href="#/wholesale">Wholesale</a><a href="#/rfq/sample">Request a sample</a></div>
+      <div><h4>Company</h4><a href="#/page/quality">Quality standards</a><a href="#/journal">Resources</a><a href="mailto:hello@brandname.com">hello@brandname.com</a><a href="#/account">My account</a></div>
+    </div>
+    <div class="fine">© 2026 Brandname. Interactive prototype: cart, checkout, accounts and RFQs are simulated; all products and data are demo.</div>
+  </div>
+</footer><template id="t-home"><div>
+  <div class="wrap lead">
+    <h1>Discover the world of fragrance.</h1>
+    <p>From distinctive fragrance collections to carefully sourced natural aromatic ingredients, explore everything the world of perfumery has to offer.</p>
+  </div>
+
+  <div class="hero" role="group" aria-label="Choose your storefront">
+    <a class="half frag" href="#/shop">
+      <svg viewBox="0 0 120 180" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2">
+        <rect x="46" y="8" width="28" height="22" fill="#a8884a" stroke="none"/>
+        <rect x="52" y="30" width="16" height="12"/>
+        <path d="M22 62q0-20 20-20h36q20 0 20 20v94q0 14-14 14H36q-14 0-14-14z"/>
+        <rect x="36" y="86" width="48" height="52" opacity=".5"/>
+        <path d="M30 70h6" opacity=".6"/>
+      </svg>
+      <h2>Fragrance House</h2>
+      <p>Original collections, designer-inspired alternatives, single-note perfumes and discovery sets.</p>
+      <span><span class="btn">Shop fragrance</span></span>
+    </a>
+    <a class="half ing" href="#/ingredients">
+      <svg viewBox="0 0 120 180" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M60 170V60"/>
+        <path d="M60 120q-34-4-40-40 34 2 40 40z"/>
+        <path d="M60 92q30-2 40-36-32-2-40 36z"/>
+        <path d="M60 60q-18-14-10-44 22 14 10 44z" fill="#7a7d52" stroke="none" opacity=".8"/>
+      </svg>
+      <h2>Ingredients Supply</h2>
+      <p>Essential oils, floral absolutes, botanical extracts and perfumery raw materials for professional buyers.</p>
+      <span><span class="btn">Explore ingredients</span></span>
+    </a>
+  </div>
+
+  <section id="divisions">
+    <div class="wrap split">
+      <div class="div-block" id="fragrance">
+        <h3>Fragrance House</h3>
+        <p>An accessible premium fragrance brand for everyday wearers, collectors and gift buyers. Every scent has its own name, packaging and story.</p>
+        <ul>
+          <li>Signature collection for men, women and unisex</li>
+          <li>Designer-inspired alternatives, each with its own identity</li>
+          <li>Single-note perfumes from vanilla to oud</li>
+          <li>Discovery sets and layering combinations</li>
+        </ul>
+        <a class="btn gold" href="#/shop">Shop fragrance</a>
+      </div>
+      <div class="div-block g" id="ingredients">
+        <h3>Ingredients Supply</h3>
+        <p>A sourcing and distribution destination for natural aromatic ingredients, with the technical documents professionals need to buy with confidence.</p>
+        <ul>
+          <li>Essential oils, including Indonesian origins</li>
+          <li>Floral absolutes and botanical extracts</li>
+          <li>Aroma chemicals, fixatives, carriers and solvents</li>
+          <li>Samples, quotations and bulk supply</li>
+        </ul>
+        <a class="btn green" href="#/ingredients">Explore ingredients</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="fragrance-picks">
+    <div class="wrap">
+      <div class="head">
+        <h2>Featured fragrance collections</h2>
+        <p>Start with a collection, or try several in a discovery set before you commit to a full bottle.</p>
+      </div>
+      <div class="grid4">
+        <div class="item"><div class="swatch" style="background:linear-gradient(150deg,#e9dcc3,#cdb584)"></div><small>Signature</small><b>Original collection</b><span>Men’s, women’s and unisex scents with their own notes.</span><a class="tag" href="#/shop/original" style="text-decoration:none">Browse signature</a></div>
+        <div class="item"><div class="swatch" style="background:linear-gradient(150deg,#d8c9a8,#b99a62)"></div><small>Alternatives</small><b>Inspired, not imitated</b><span>Floral, woody, oriental, fresh and gourmand styles.</span><a class="tag" href="#/shop/inspired" style="text-decoration:none">Browse alternatives</a></div>
+        <div class="item"><div class="swatch" style="background:linear-gradient(150deg,#f1e8d2,#dcc9a0)"></div><small>Single-note</small><b>One note, done well</b><span>Vanilla, rose, jasmine, musk, oud, sandalwood and more.</span><a class="tag" href="#/shop/single" style="text-decoration:none">Browse single-note</a></div>
+        <div class="item"><div class="swatch" style="background:linear-gradient(150deg,#cfc0a0,#8f7a50)"></div><small>Discovery</small><b>Sets and layering</b><span>Sample kits and combinations to build your own fragrance wardrobe.</span><a class="tag" href="#/shop/discovery" style="text-decoration:none">Browse sets</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ingredient-picks">
+    <div class="wrap">
+      <div class="head">
+        <h2>Featured natural ingredients</h2>
+        <p>Each listing carries the commercial name, botanical name, origin, extraction method and available documents.</p>
+      </div>
+      <div class="grid4">
+        <div class="item g"><div class="swatch" style="background:linear-gradient(150deg,#3b5a47,#2f4a3a)"></div><small>Essential oil</small><b>Patchouli oil</b><span>Pogostemon cablin. Earthy, woody, long-lasting base note.</span><a class="tag" href="#/rfq/sample" style="text-decoration:none">Request sample</a></div>
+        <div class="item g"><div class="swatch" style="background:linear-gradient(150deg,#4a4f33,#7a7d52)"></div><small>Essential oil</small><b>Vetiver oil</b><span>Vetiveria zizanioides. Smoky, rooty, deeply fixative.</span><a class="tag" href="#/rfq/sample" style="text-decoration:none">Request sample</a></div>
+        <div class="item g"><div class="swatch" style="background:linear-gradient(150deg,#6b7a4d,#a3a56d)"></div><small>Floral absolute</small><b>Jasmine absolute</b><span>Jasminum sambac. Rich, indolic, warm white floral.</span><a class="tag" href="#/rfq/quote" style="text-decoration:none">Request quote</a></div>
+        <div class="item g"><div class="swatch" style="background:linear-gradient(150deg,#2f4a3a,#1f3328)"></div><small>Raw materials</small><b>Fixatives and carriers</b><span>Specialty formulation materials with technical specifications.</span><a class="tag" href="#/rfq/quote" style="text-decoration:none">Request quote</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wholesale" id="wholesale">
+    <div class="wrap">
+      <div>
+        <h2>Buying for a brand or a factory?</h2>
+        <p>Perfumers, cosmetic and candle makers, and distributors can order samples, request quotations and set up recurring supply. Tell us what you need and we will source it.</p>
+        <a class="btn" href="#/page/contact">Request a quote</a>
+      </div>
+      <dl>
+        <dt>Samples first</dt><dd>Test an ingredient before you commit to volume.</dd>
+        <dt>Bulk and recurring supply</dt><dd>Quotations for larger orders and standing procurement agreements.</dd>
+        <dt>Custom sourcing</dt><dd>Looking for something not listed? We will check our supplier network.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="quality">
+    <div class="wrap">
+      <div class="head"><h2>Sourcing and quality standards</h2><p>We only list products we can source and support with proper documentation.</p></div>
+      <div class="std">
+        <div><h3>Technical documents</h3><p>COA, SDS and GC-MS availability is shown on each ingredient page, along with allergen declarations where they apply.</p></div>
+        <div><h3>Transparent origin</h3><p>Botanical name, origin, plant part and extraction method are listed for every natural ingredient.</p></div>
+        <div><h3>Original branding</h3><p>Our fragrances have their own names and packaging, with no copied logos or claims of affiliation with designer houses.</p></div>
+        <div><h3>Shipping by product</h3><p>Perfumes, oils and extracts need carrier approval, so shipping options depend on the product and your destination.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band edu" id="learn">
+    <div class="wrap">
+      <div class="head"><h2>Learn before you buy</h2></div>
+      <a href="#/journal"><b>How to layer fragrances</b><span>For fragrance shoppers</span></a>
+      <a href="#/journal"><b>Absolute or essential oil?</b><span>For ingredient buyers</span></a>
+      <a href="#/journal"><b>Understanding technical documentation</b><span>COA, SDS and GC-MS explained</span></a>
+      <a href="#/journal"><b>Handling and storing natural ingredients</b><span>For ingredient buyers</span></a>
+    </div>
+  </section>
+
+  <section class="news" id="newsletter">
+    <div class="wrap">
+      <div><h2>Stay in the loop</h2><p style="margin-top:12px;color:var(--muted)">New fragrance releases, restocked ingredients and guides. Choose what you want to hear about.</p></div>
+      <form id="nf" novalidate>
+        <div class="row"><input id="em" type="email" placeholder="Email address" aria-label="Email address" required>
+        <select id="int" aria-label="Interest"><option>Fragrance</option><option>Ingredients</option><option>Both</option></select></div>
+        <button class="btn gold" type="submit">Subscribe</button>
+        <div id="msg" role="status"></div>
+      </form>
+    </div>
+  </section>
+</div></template><dialog id="qv"><div id="qvb"></div></dialog><div id="toast" role="status"></div><script>const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const CUR={USD:[1,'en-US'],EUR:[.92,'de-DE'],GBP:[.79,'en-GB'],AED:[3.67,'en-AE'],IDR:[16000,'id-ID']};
+let S={cur:'USD',cart:[],wish:[],user:null,orders:[],f:{},g:{},country:'US',last:null,rfq:null};
+const money=n=>new Intl.NumberFormat(CUR[S.cur][1],{style:'currency',currency:S.cur,maximumFractionDigits:S.cur=='IDR'?0:2}).format(n*CUR[S.cur][0]);
+const COL={all:['Shop All','Every fragrance in the house, in one place.'],original:['Original Collection','Signature scents with their own names, notes and stories.'],inspired:['Inspired Collection','Alternatives with their own identity, never imitation.'],single:['Single-note Perfumes','One note, done well.'],oils:['Perfume Oils','Alcohol-free, close to the skin.'],discovery:['Discovery Sets','Sample before you commit to a bottle.'],edp:['Eau de Parfum','Balanced concentration for everyday wear.'],extrait:['Extrait de Parfum','Our most concentrated, longest-lasting form.'],best:['Best Sellers','What our customers return to.'],seasonal:['Seasonal Collections','Scents chosen for the time of year.'],travel:['Travel-size Fragrances','Small formats for the journey.'],layering:['Perfume Layering Sets','Pairs designed to be worn together.']};
+const F=[['aurum','Aurum Oud','Extrait de Parfum','Oriental','Unisex',['Saffron'],['Rose','Oud'],['Amber','Vanilla'],['original','extrait','best'],[['30 ml',88],['50 ml',128]],4.8,214,0,95,1,'Resinous oud softened by amber and warm vanilla.',38],
+['jardin','Jardin Blanc','Eau de Parfum','Floral','Women',['Bergamot'],['Jasmine','Rose'],['Musk'],['original','edp','best'],[['30 ml',64],['50 ml',92],['100 ml',138]],4.7,342,0,120,1,'A white floral garden at dusk, soft and luminous.',44],
+['vetiver','Vetiver Noir','Eau de Parfum','Woody','Men',['Pepper'],['Vetiver'],['Cedar','Patchouli'],['inspired','edp'],[['50 ml',78],['100 ml',118]],4.5,88,0,60,1,'Smoky vetiver over dry cedar. A woody alternative.',90],
+['vanille','Vanille Simple','Perfume Oil','Gourmand','Unisex',[],['Vanilla'],['Musk'],['single','oils','travel'],[['10 ml',36]],4.6,157,0,75,1,'Single-note vanilla in an alcohol-free oil.',30],
+['rose','Rose Absolue','Eau de Parfum','Floral','Women',[],['Rose'],['Musk'],['single','edp'],[['30 ml',70],['50 ml',98]],4.4,64,0,30,0,'Rose, and only rose, from first spray to dry-down.',8],
+['citrus','Citrus Matin','Eau de Parfum','Fresh','Unisex',['Bergamot','Lemon'],['Neroli'],['Cedar'],['original','seasonal','travel'],[['10 ml',28],['50 ml',72]],4.3,41,1,20,1,'Bright morning citrus with a green neroli heart.',60],
+['set1','Discovery Set Nº1','Discovery Set','Mixed','Unisex',[],[],[],['discovery','travel'],[['Set of 5 × 2 ml',39]],4.9,402,0,150,1,'Five of our signature scents to try before you buy.',40],
+['duo','Oud & Vanilla Layering Duo','Layering Set','Oriental','Unisex',[],['Oud'],['Vanilla'],['layering','original'],[['2 × 30 ml',84]],4.7,76,1,45,1,'Aurum Oud and Vanille Simple, paired to wear together.',36]]
+.map(a=>({id:a[0],name:a[1],conc:a[2],fam:a[3],gen:a[4],top:a[5],heart:a[6],base:a[7],cols:a[8],sz:a[9],rating:a[10],rev:a[11],isNew:a[12],sold:a[13],stock:a[14],desc:a[15],hue:a[16]}));
+const IC={essential:'Essential Oils',absolutes:'Floral Absolutes',co2:'CO2 Extracts',botanical:'Botanical Extracts',oleoresins:'Oleoresins',chemicals:'Aroma Chemicals',isolates:'Natural Isolates',fixatives:'Fixatives',carrier:'Carrier Oils',bases:'Perfumery Bases'};
+const I=[['patchouli','Patchouli Oil','Pogostemon cablin','essential','Indonesia','Steam distillation',['Perfumery','Cosmetic'],'1 kg',1,'Earthy, woody base note.','8014-09-3','Leaf','Amber-brown liquid','Earthy, woody, sweet','Soluble in ethanol and oils'],
+['vetiver','Vetiver Oil','Vetiveria zizanioides','essential','Indonesia','Steam distillation',['Perfumery'],'1 kg',1,'Smoky, rooty, deeply fixative.','8016-96-4','Root','Viscous amber liquid','Smoky, earthy, woody','Soluble in ethanol'],
+['ylang','Ylang Ylang Oil','Cananga odorata','essential','Indonesia','Steam distillation',['Perfumery','Cosmetic'],'500 g',1,'Creamy, sweet floral top note.','—','Flower','Pale yellow liquid','Sweet, creamy, floral','Soluble in ethanol'],
+['jasmine','Jasmine Sambac Absolute','Jasminum sambac','absolutes','India','Solvent extraction',['Perfumery'],'100 g',0,'Rich, indolic, warm white floral.','—','Flower','Dark orange liquid','Rich, floral, indolic','Soluble in ethanol'],
+['rose','Rose Absolute','Rosa damascena','absolutes','Turkey','Solvent extraction',['Perfumery'],'50 g',0,'Deep, honeyed, petal-rich rose.','—','Petal','Reddish-brown viscous liquid','Rosy, honeyed','Soluble in ethanol'],
+['vanilla','Vanilla CO2 Extract','Vanilla planifolia','co2','Madagascar','CO2 extraction',['Perfumery','Food-adjacent'],'250 g',1,'Warm, creamy, balsamic.','—','Pod','Dark brown paste','Sweet, creamy, balsamic','Soluble in ethanol'],
+['ginger','Ginger Oleoresin','Zingiber officinale','oleoresins','India','Solvent extraction',['Cosmetic'],'5 kg',1,'Warm, spicy, pungent.','—','Rhizome','Brown viscous liquid','Spicy, warm','Soluble in oils'],
+['mdj','Methyl Dihydrojasmonate','Aroma chemical','chemicals','Europe (demo)','Synthesis',['Perfumery'],'5 kg',1,'Transparent, airy jasmine.','24851-98-7','—','Colourless liquid','Floral, jasmine-like','Soluble in ethanol'],
+['jojoba','Jojoba Carrier Oil','Simmondsia chinensis','carrier','Peru (demo)','Cold pressing',['Cosmetic'],'10 kg',1,'Stable, near-odourless carrier.','—','Seed','Golden liquid','Almost odourless','Miscible with oils']]
+.map(a=>({id:a[0],name:a[1],lat:a[2],cat:a[3],origin:a[4],method:a[5],grades:a[6],moq:a[7],sample:a[8],desc:a[9],cas:a[10],part:a[11],look:a[12],odor:a[13],sol:a[14]}));
+const ART={layering:['How to layer fragrances','Fragrance journal','Begin with the heavier scent on skin, then add a lighter one over it. Pair notes that share a thread, such as oud with vanilla, so the combination reads as one idea. Spray each in different places before blending them on the same spot.'],families:['Understanding fragrance families','Fragrance journal','Floral, woody, oriental, fresh and gourmand: five families that describe how a scent behaves. Knowing which you reach for is the quickest route to a signature scent.'],edp:['Eau de Parfum vs Extrait','Fragrance journal','Concentration describes how much aromatic oil a fragrance contains. Extrait carries the most and tends to stay closer to the skin for longer; Eau de Parfum is lighter and more diffusive.'],absolute:['Absolute or essential oil?','Ingredient library','Essential oils are usually steam distilled; absolutes are solvent extracted, which captures heavier floral material that heat would damage.'],docs:['Understanding technical documentation','Technical resources','A COA states the results for a specific batch, an SDS covers safe handling, and GC-MS shows the composition profile. Availability varies by product and is listed on each ingredient page.'],storage:['Handling and storing natural ingredients','Technical resources','Keep containers tightly closed, cool, dark and away from heat. Decant under clean conditions and note batch numbers.']};
+const NAV=[['Fragrance','/shop',Object.keys(COL).map(k=>[COL[k][0],'/shop/'+k])],['Ingredients','/ingredients',[...Object.keys(IC).map(k=>[IC[k],'/ingredients/'+k]),['All Ingredients','/ingredients']]],['B2B & Wholesale','/wholesale',[['Wholesale Supply','/wholesale'],['Request Samples','/rfq/sample'],['Request Quotation','/rfq/quote'],['Custom Sourcing','/rfq/sourcing']]],['Discover','/journal',[['Fragrance Journal','/journal'],['Ingredient Library','/library'],['Technical Resources','/resources'],['About Us','/page/about']]]];
+const q=new URLSearchParams(),stars=r=>'★'.repeat(Math.round(r))+'☆'.repeat(5-Math.round(r));
+const hue=h=>`linear-gradient(150deg,hsl(${h} 42% 85%),hsl(${h} 38% 64%))`;
+const BOT='<svg viewBox="0 0 120 180" fill="none" stroke="#2a2724" stroke-width="1.2" aria-hidden="true" style="width:34%;opacity:.8"><rect x="46" y="8" width="28" height="22" fill="#a8884a" stroke="none"/><rect x="52" y="30" width="16" height="12"/><path d="M22 62q0-20 20-20h36q20 0 20 20v94q0 14-14 14H36q-14 0-14-14z"/><rect x="36" y="86" width="48" height="52" opacity=".5"/></svg>';
+const LEAF='<svg viewBox="0 0 120 180" fill="none" stroke="#f1ecdf" stroke-width="1.2" aria-hidden="true" style="width:30%;opacity:.85"><path d="M60 170V60"/><path d="M60 120q-34-4-40-40 34 2 40 40z"/><path d="M60 92q30-2 40-36-32-2-40 36z"/></svg>';
+const sw=(p,big)=>`<div class="sw" style="background:${hue(p.hue)};${big?'aspect-ratio:4/5':''}">${BOT}</div>`;
+const from=p=>Math.min(...p.sz.map(s=>s[1]));
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2200)}
+function counts(){$('#cc').textContent=S.cart.reduce((a,c)=>a+c.qty,0);$('#wc').textContent=S.wish.length}
+function add(id,i,qty=1,go){const k=S.cart.find(c=>c.id==id&&c.si==i);k?k.qty+=qty:S.cart.push({id,si:+i,qty});counts();go?location.hash='/cart':toast('Added to cart')}
+function wish(id){const i=S.wish.indexOf(id);i<0?S.wish.push(id):S.wish.splice(i,1);counts();toast(i<0?'Saved to wishlist':'Removed from wishlist');if(route.p[0]=='wishlist')render();else document.querySelectorAll('[data-w="'+id+'"]').forEach(b=>b.setAttribute('aria-pressed',S.wish.includes(id)))}
+function setCur(c){S.cur=c;render()}
+const sub=()=>S.cart.reduce((a,c)=>a+F.find(p=>p.id==c.id).sz[c.si][1]*c.qty,0);
+const FEE={US:12,GB:14,DE:14,AE:16,ID:10,AU:28};
+const fld=(id,l,t='text',v='',x='')=>`<label>${l}<input id="${id}" name="${id}" type="${t}" value="${E(v)}" ${x}></label>`;
+const selF=(k,l,o,st)=>`<label>${l}<select onchange="setF('${st}','${k}',this.value)">${o.map(x=>`<option value="${E(x[0])}" ${(S[st][k]||'')==x[0]?'selected':''}>${E(x[1])}</option>`).join('')}</select></label>`;
+function setF(st,k,v){S[st][k]=v;st=='f'?fill():fillI()}
+const uniq=a=>[...new Set(a)];
+function card(p){return `<article class="pc"><a href="#/p/${p.id}" aria-label="${E(p.name)}">${sw(p)}</a><div class="pcb"><small>${p.conc} · ${p.gen}</small><h3><a href="#/p/${p.id}">${E(p.name)}</a></h3><p>${p.desc}</p><small class="rt">${stars(p.rating)} ${p.rating} (${p.rev}) · demo ratings</small><small>${p.sz.map(s=>s[0]).join(' / ')}</small><small class="lab">${p.cols.map(c=>COL[c][0]).join(' · ')}</small><b>From ${money(from(p))}</b><div class="acts"><button class="btn gold" onclick="add('${p.id}',0)" ${p.stock?'':'disabled'}>${p.stock?'Add to cart':'Sold out'}</button><button class="btn" onclick="qv('${p.id}')">Quick view</button><button class="btn hrt" data-w="${p.id}" aria-pressed="${S.wish.includes(p.id)}" aria-label="Wishlist" onclick="wish('${p.id}')">♡</button></div></article>`}
+function qv(id){const p=F.find(x=>x.id==id);$('#qvb').innerHTML=`<h3>${E(p.name)}</h3><p style="color:var(--muted);margin:8px 0">${p.desc}</p><p><small>Notes: ${[...p.top,...p.heart,...p.base].join(', ')||'Assorted'}</small></p><p style="margin:12px 0"><b>From ${money(from(p))}</b></p><a class="btn green" href="#/p/${p.id}" onclick="$('#qv').close()">View full details</a> <button class="btn" onclick="$('#qv').close()">Close</button>`;$('#qv').showModal()}
+function shop(slug){const c=COL[slug]||COL.all;const all=slug&&COL[slug]&&slug!='all';S.f=S.f||{};if(!S.f.col)S.f.col=all?slug:'';
+$('#app').innerHTML=`<div class="wrap lead sm"><small class="eye">Fragrance House</small><h1>${c[0]}</h1><p>${c[1]}</p></div><section class="band"><div class="wrap"><div class="filters"><label>Search<input type="search" value="${E(S.f.q||'')}" oninput="setF('f','q',this.value)" placeholder="Name or note"></label>${selF('gen','For',[['','Everyone'],['Men','Men'],['Women','Women'],['Unisex','Unisex']],'f')}${selF('fam','Family',[['','All families'],...uniq(F.map(p=>p.fam)).map(x=>[x,x])],'f')}${selF('note','Note',[['','Any note'],...uniq(F.flatMap(p=>[...p.top,...p.heart,...p.base])).sort().map(x=>[x,x])],'f')}${selF('conc','Concentration',[['','All'],...uniq(F.map(p=>p.conc)).map(x=>[x,x])],'f')}${selF('price','Price',[['','Any'],['50','Under $50'],['100','Under $100'],['200','Under $200']],'f')}${selF('stock','Availability',[['','All'],['1','In stock']],'f')}${selF('col','Collection',[['','All'],...Object.keys(COL).filter(k=>k!='all').map(k=>[k,COL[k][0]])],'f')}${selF('sort','Sort',[['','Featured'],['best','Best selling'],['new','Newest'],['lo','Price: low to high'],['hi','Price: high to low']],'f')}</div><p id="cnt" role="status" class="cnt"></p><div class="pg" id="grid"></div></div></section>`;fill()}
+function fill(){const f=S.f,t=(f.q||'').toLowerCase();let r=F.filter(p=>(!f.gen||p.gen==f.gen)&&(!f.fam||p.fam==f.fam)&&(!f.conc||p.conc==f.conc)&&(!f.note||[...p.top,...p.heart,...p.base].includes(f.note))&&(!f.price||from(p)<+f.price)&&(!f.stock||p.stock)&&(!f.col||p.cols.includes(f.col))&&(!t||(p.name+p.desc+p.fam+p.top+p.heart+p.base).toLowerCase().includes(t)));
+const so={best:(a,b)=>b.sold-a.sold,new:(a,b)=>b.isNew-a.isNew,lo:(a,b)=>from(a)-from(b),hi:(a,b)=>from(b)-from(a)}[f.sort];if(so)r.sort(so);
+$('#grid').innerHTML=r.map(card).join('')||'<p>No fragrances match these filters.</p>';$('#cnt').textContent=r.length+' fragrance'+(r.length==1?'':'s')}
+function pdp(id){const p=F.find(x=>x.id==id);if(!p)return nf();let si=0,qt=1;const sku='BN-'+p.id.toUpperCase()+'-';
+$('#app').innerHTML=`<div class="wrap pd"><div><div id="big">${sw(p,1)}</div><div class="th">${[0,1,2].map(i=>`<button aria-label="View ${i+1}" onclick="$('#big').innerHTML=this.dataset.s" data-s='${sw({hue:p.hue+i*12},1).replace(/'/g,'&#39;')}'><div class="sw" style="background:${hue(p.hue+i*12)};height:70px"></div></button>`).join('')}</div></div><div><small class="eye">${p.conc} · ${p.gen}</small><h1>${E(p.name)}</h1><p class="rt">${stars(p.rating)} ${p.rating} · ${p.rev} reviews (demo)</p><p style="margin:14px 0;color:var(--muted)">${p.desc}</p><h2 id="pr" style="margin:8px 0"></h2><small id="sk"></small><fieldset><legend>Size</legend>${p.sz.map((s,i)=>`<button class="btn sz" aria-pressed="${i==0}" data-i="${i}">${s[0]}</button>`).join('')}</fieldset><div class="row2"><label>Quantity<input id="qt" type="number" min="1" max="10" value="1"></label><span style="color:${p.stock?'var(--green)':'var(--muted)'}">${p.stock?'In stock':'Sold out'}</span></div><div class="acts"><button class="btn gold" id="a1" ${p.stock?'':'disabled'}>Add to cart</button><button class="btn green" id="a2" ${p.stock?'':'disabled'}>Buy now</button><button class="btn hrt" data-w="${p.id}" aria-pressed="${S.wish.includes(p.id)}" onclick="wish('${p.id}')">♡ Wishlist</button></div>
+<table class="tbl"><tr><th>Top notes</th><td>${p.top.join(', ')||'—'}</td></tr><tr><th>Heart notes</th><td>${p.heart.join(', ')||'—'}</td></tr><tr><th>Base notes</th><td>${p.base.join(', ')||'—'}</td></tr><tr><th>Family</th><td>${p.fam}</td></tr><tr><th>Longevity</th><td>${p.conc.startsWith('Extrait')?'8–12 hours':p.conc.startsWith('Perfume Oil')?'4–6 hours':'6–8 hours'} (illustrative)</td></tr><tr><th>Sillage</th><td>${p.conc.startsWith('Extrait')?'Strong':'Moderate'} (illustrative)</td></tr><tr><th>Occasions</th><td>${p.fam=='Fresh'?'Daytime, office, travel':'Evenings, special occasions'}</td></tr></table>
+<details><summary>Shipping information</summary><p>Fragrances contain flammable liquids and need carrier approval. Eligible destinations and methods are confirmed at checkout. Demo rules.</p></details><details><summary>Usage and storage</summary><p>Apply to pulse points from 15 cm. Store away from sunlight and heat.</p></details><details><summary>Ingredients</summary><p>Alcohol denat., parfum, aqua. Allergen list shown on pack (demo placeholder).</p></details></div></div><section class="band"><div class="wrap"><div class="head"><h2>You may also like</h2></div><div class="pg">${F.filter(x=>x.id!=p.id&&x.fam==p.fam||x.cols.includes('layering')&&x.id!=p.id).slice(0,3).map(card).join('')}</div></div></section>`;
+const up=()=>{$('#pr').textContent=money(p.sz[si][1]);$('#sk').textContent='SKU '+sku+p.sz[si][0].replace(/\W/g,'')};up();
+document.querySelectorAll('.sz').forEach(b=>b.onclick=()=>{si=+b.dataset.i;document.querySelectorAll('.sz').forEach(x=>x.setAttribute('aria-pressed',x==b));up()});
+const Q=()=>Math.max(1,Math.min(10,+$('#qt').value||1));$('#a1').onclick=()=>add(p.id,si,Q());$('#a2').onclick=()=>add(p.id,si,Q(),1)}
+function cart(){if(!S.cart.length){$('#app').innerHTML=`<div class="wrap lead sm"><h1>Your cart</h1><p>Your cart is empty.</p><p style="margin-top:24px"><a class="btn gold" href="#/shop">Shop fragrance</a></p></div>`;return}
+const s=sub(),sh=s>200?0:FEE[S.country];
+$('#app').innerHTML=`<div class="wrap lead sm"><h1>Your cart</h1></div><div class="wrap split" style="padding-bottom:88px"><div>${S.cart.map((c,i)=>{const p=F.find(x=>x.id==c.id);return `<div class="crow">${sw(p)}<div><h3><a href="#/p/${p.id}">${E(p.name)}</a></h3><small>${p.conc}</small><div class="row2"><label>Size<select onchange="S.cart[${i}].si=+this.value;render()">${p.sz.map((z,j)=>`<option value="${j}" ${j==c.si?'selected':''}>${z[0]}</option>`).join('')}</select></label><label>Qty<input type="number" min="1" max="10" value="${c.qty}" onchange="S.cart[${i}].qty=Math.max(1,+this.value||1);render()"></label></div><button class="lnk" onclick="S.cart.splice(${i},1);render()">Remove</button></div><b>${money(p.sz[c.si][1]*c.qty)}</b></div>`}).join('')}</div><aside class="sum"><h3>Summary</h3>${rows([['Subtotal',money(s)],['Estimated shipping',sh?money(sh):'Free'],['Total',money(s+sh)]])}<label>Destination<select onchange="S.country=this.value;render()">${Object.keys(FEE).map(k=>`<option ${k==S.country?'selected':''}>${k}</option>`).join('')}</select></label><small>Estimate only. Perfumes ship only where carriers allow; free standard shipping over ${money(200)}.</small><a class="btn gold" style="margin-top:14px;text-align:center" href="#/checkout">Checkout</a></aside></div>`}
+const rows=a=>`<table class="tbl">${a.map(r=>`<tr><th>${r[0]}</th><td>${r[1]}</td></tr>`).join('')}</table>`;
+function checkout(){if(!S.cart.length){location.hash='/cart';return}const s=sub();
+$('#app').innerHTML=`<div class="wrap lead sm"><h1>Checkout</h1><p>Prototype only. No payment is taken.</p></div><div class="wrap split" style="padding-bottom:88px"><form id="ck" novalidate class="fm"><h3>Customer</h3>${fld('email','Email','email',S.user||'')}${fld('name','Full name')}<h3>Shipping address</h3>${fld('addr','Address')}${fld('city','City')}${fld('zip','Postal code')}<label>Country<select id="co">${Object.keys(FEE).map(k=>`<option ${k==S.country?'selected':''}>${k}</option>`).join('')}</select></label><h3>Shipping method</h3><label class="ch"><input type="radio" name="sm" value="0" checked> Standard (5–9 days)</label><label class="ch"><input type="radio" name="sm" value="20"> Express (+${money(20)})</label><h3>Payment (simulated)</h3><label class="ch"><input type="radio" name="pm" checked> Credit or debit card</label><label class="ch"><input type="radio" name="pm"> PayPal</label><p id="err" role="alert" class="err"></p><button class="btn gold" type="submit">Place order</button></form><aside class="sum"><h3>Order summary</h3>${S.cart.map(c=>{const p=F.find(x=>x.id==c.id);return `<p>${c.qty} × ${E(p.name)} <small>${p.sz[c.si][0]}</small></p>`}).join('')}${rows([['Subtotal',money(s)],['Shipping','Calculated by method'],])}</aside></div>`;
+$('#ck').onsubmit=e=>{e.preventDefault();const g=i=>$('#'+i).value.trim(),er=$('#err');if(!/^\S+@\S+\.\S+$/.test(g('email')))return er.textContent='Enter a valid email address.';for(const [i,l] of [['name','full name'],['addr','address'],['city','city'],['zip','postal code']])if(!g(i))return er.textContent='Please enter your '+l+'.';
+const sh=(s>200?0:FEE[g('co')])+ +document.querySelector('[name=sm]:checked').value;S.last={no:'BN-'+(1000+S.orders.length+1),date:new Date().toLocaleDateString(),items:S.cart.map(c=>({...c})),name:g('name'),email:g('email'),addr:g('addr')+', '+g('city')+' '+g('zip')+', '+g('co'),total:s+sh,cur:S.cur};S.orders.unshift(S.last);S.cart=[];counts();location.hash='/confirm'}}
+function confirmP(){const o=S.last;if(!o)return location.hash='/';$('#app').innerHTML=`<div class="wrap lead"><small class="eye">Thank you</small><h1>Order ${E(o.no)} received.</h1><p>This is a simulated order. No payment was taken and no email was sent. Total ${money(o.total)}, shipping to ${E(o.name)}, ${E(o.addr)}.</p><p style="margin-top:24px"><a class="btn gold" href="#/account">View order history</a> <a class="btn" href="#/shop">Continue shopping</a></p></div>`}
+function wl(){$('#app').innerHTML=`<div class="wrap lead sm"><h1>Wishlist</h1></div><div class="wrap" style="padding-bottom:88px">${S.wish.length?`<div class="pg">${S.wish.map(id=>card(F.find(p=>p.id==id))).join('')}</div>`:'<p style="text-align:center">Nothing saved yet. Tap ♡ on any fragrance.</p>'}</div>`}
+function account(tab){if(!S.user){$('#app').innerHTML=`<div class="wrap lead sm"><h1>${tab=='register'?'Create account':'Sign in'}</h1><p>Simulated. Any valid email works; nothing is stored on a server.</p></div><div class="wrap" style="max-width:520px;padding-bottom:88px"><form id="lg" class="fm" novalidate>${tab=='register'?fld('rn','Full name'):''}${fld('le','Email','email')}${fld('lp','Password','password')}<p id="err" role="alert" class="err"></p><button class="btn gold">${tab=='register'?'Register':'Sign in'}</button><p><a href="#/account/${tab=='register'?'login':'register'}">${tab=='register'?'Have an account? Sign in':'New here? Create account'}</a></p></form></div>`;$('#lg').onsubmit=e=>{e.preventDefault();const em=$('#le').value.trim(),er=$('#err');if(!/^\S+@\S+\.\S+$/.test(em))return er.textContent='Enter a valid email address.';if($('#lp').value.length<6)return er.textContent='Password needs at least 6 characters.';S.user=em;render()};return}
+const t=tab||'orders';$('#app').innerHTML=`<div class="wrap lead sm"><h1>My account</h1><p>${E(S.user)}</p></div><div class="wrap" style="padding-bottom:88px"><div class="tabs">${['orders','wishlist','addresses','profile'].map(x=>`<a href="#/account/${x}" aria-current="${x==t}">${x[0].toUpperCase()+x.slice(1)}</a>`).join('')}<button class="lnk" onclick="S.user=null;location.hash='/'">Sign out</button></div>${t=='orders'?(S.orders.length?S.orders.map(o=>`<div class="item" style="margin-bottom:14px"><b>${o.no}</b><small>${o.date} · ${o.items.length} line(s) · ${money(o.total)}</small>${o.items.map(c=>{const p=F.find(x=>x.id==c.id);return `<span>${c.qty} × ${E(p.name)} (${p.sz[c.si][0]})</span>`}).join('')}</div>`).join(''):'<p>No orders yet. Place a demo order to see it here.</p>'):t=='wishlist'?(S.wish.length?`<div class="pg">${S.wish.map(id=>card(F.find(p=>p.id==id))).join('')}</div>`:'<p>Wishlist is empty.</p>'):t=='addresses'?`<p>${S.orders[0]?E(S.orders[0].addr):'No saved address yet. Your last checkout address appears here.'}</p>`:`<form class="fm" style="max-width:480px" onsubmit="event.preventDefault();toast('Profile saved (demo)')">${fld('pn','Name','text',S.orders[0]?.name||'')}${fld('pe','Email','email',S.user)}<button class="btn gold">Save</button></form>`}</div>`}
+function ing(cat){S.g={cat:cat&&IC[cat]?cat:''};const c=IC[cat];$('#app').innerHTML=`<div class="wrap lead sm g"><small class="eye">Ingredients Supply</small><h1>${c||'All Ingredients'}</h1><p>${c?'Professional-grade '+c.toLowerCase()+' for perfumers and formulators.':'Essential oils, absolutes, extracts and raw materials for professional buyers.'} All product data shown is demo data.</p></div><section class="band"><div class="wrap"><div class="filters"><label>Search<input type="search" oninput="setF('g','q',this.value)" placeholder="Name, botanical, CAS"></label>${selF('cat','Category',[['','All'],...Object.keys(IC).map(k=>[k,IC[k]])],'g')}${selF('origin','Origin',[['','All'],...uniq(I.map(x=>x.origin)).map(x=>[x,x])],'g')}${selF('method','Extraction',[['','All'],...uniq(I.map(x=>x.method)).map(x=>[x,x])],'g')}${selF('grade','Grade',[['','All'],...uniq(I.flatMap(x=>x.grades)).map(x=>[x,x])],'g')}${selF('sample','Samples',[['','All'],['1','Sample available']],'g')}${selF('sort','Sort',[['','Name A–Z'],['cat','Category'],['origin','Origin']],'g')}</div><p id="cnt" role="status" class="cnt"></p><div class="pg" id="grid"></div></div></section>`;fillI()}
+function fillI(){const f=S.g,t=(f.q||'').toLowerCase();let r=I.filter(x=>(!f.cat||x.cat==f.cat)&&(!f.origin||x.origin==f.origin)&&(!f.method||x.method==f.method)&&(!f.grade||x.grades.includes(f.grade))&&(!f.sample||x.sample)&&(!t||(x.name+x.lat+x.cas).toLowerCase().includes(t)));r.sort((a,b)=>(a[f.sort||'name']).localeCompare(b[f.sort||'name']));
+$('#grid').innerHTML=r.map(x=>`<article class="pc g"><a href="#/i/${x.id}"><div class="sw" style="background:linear-gradient(150deg,#3b5a47,#2f4a3a)">${LEAF}</div></a><div class="pcb"><small>${IC[x.cat]} · ${x.origin}</small><h3><a href="#/i/${x.id}">${x.name}</a></h3><small><i>${x.lat}</i></small><p>${x.desc}</p><small>Grade: ${x.grades.join(', ')} · MOQ ${x.moq}</small><small>${x.sample?'Sample available':'Sample on request'}</small><div class="acts"><a class="btn green" href="#/rfq/quote?i=${x.id}">Request quotation</a><a class="btn" href="#/i/${x.id}">Details</a></div></div></article>`).join('')||'<p>No ingredients match.</p>';$('#cnt').textContent=r.length+' ingredient'+(r.length==1?'':'s')}
+function ingd(id){const x=I.find(y=>y.id==id);if(!x)return nf();const D='Available on request (demo, no document attached)';$('#app').innerHTML=`<div class="wrap lead sm g"><small class="eye">${IC[x.cat]}</small><h1>${x.name}</h1><p><i>${x.lat}</i> · Demo data, not for procurement decisions.</p></div><div class="wrap split g" style="padding-bottom:88px"><div><h3>Identity</h3>${rows([['Commercial name',x.name],['Botanical / chemical',x.lat],['Category',IC[x.cat]],['CAS number',x.cas],['Origin',x.origin],['Plant part',x.part]])}<h3>Technical specifications</h3>${rows([['Extraction',x.method],['Appearance',x.look],['Odour profile',x.odor],['Grades',x.grades.join(', ')],['Solubility',x.sol],['Packaging','Aluminium, HDPE (demo)']])}</div><div><h3>Commercial</h3>${rows([['MOQ',x.moq],['Quantities','1 kg to bulk drums (demo)'],['Samples',x.sample?'Available':'On request']])}<p style="margin:12px 0"><a class="btn green" href="#/rfq/sample?i=${x.id}">Request sample</a> <a class="btn" href="#/rfq/quote?i=${x.id}">Request quotation</a></p><h3>Documentation</h3>${rows([['COA',D],['SDS',D],['GC-MS',D],['Allergen declaration',D],['Technical data sheet',D]])}</div></div>`}
+function rfq(type,qs){const T={quote:'Request quotation',sample:'Request samples',sourcing:'Custom sourcing'};type=T[type]?type:'quote';const pre=new URLSearchParams(qs).get('i');
+$('#app').innerHTML=`<div class="wrap lead sm g"><small class="eye">B2B & Wholesale</small><h1>${T[type]}</h1><p>Separate from retail checkout. We reply to business emails only (simulated).</p></div><div class="wrap" style="max-width:720px;padding-bottom:88px"><div class="tabs">${Object.keys(T).map(k=>`<a href="#/rfq/${k}" aria-current="${k==type}">${T[k]}</a>`).join('')}</div><form id="rf" class="fm two" novalidate>${fld('co','Company name')}${fld('cp','Contact person')}${fld('be','Business email','email')}${fld('cn','Country')}<label>Product of interest<select id="pi">${I.map(x=>`<option value="${x.id}" ${x.id==(pre||'patchouli')?'selected':''}>${x.name}</option>`).join('')}<option value="custom">Other / not listed</option></select></label>${fld('qty','Required quantity (kg)','number',type=='sample'?'0.1':'25','min="0.01" step="any"')}<label>Preferred grade<select id="gr"><option>Perfumery</option><option>Cosmetic</option><option>Any</option></select></label><label>Supply type<select id="st"><option>One-time</option><option>Recurring</option><option>Bulk</option></select></label><label class="full">Intended application<input id="ap" placeholder="e.g. fine fragrance, candles"></label><label class="full">Additional requirements<textarea id="ad" rows="3"></textarea></label><p id="err" role="alert" class="err full"></p><button class="btn green full">Submit</button></form></div>`;
+$('#rf').onsubmit=e=>{e.preventDefault();const g=i=>$('#'+i).value.trim(),er=$('#err');for(const [i,l] of [['co','company name'],['cp','contact person'],['cn','country'],['ap','intended application']])if(!g(i))return er.textContent='Please enter '+l+'.';if(!/^\S+@\S+\.\S+$/.test(g('be')))return er.textContent='Enter a valid business email.';if(!(+g('qty')>0))return er.textContent='Enter a quantity above zero.';
+S.rfq={ref:'RFQ-'+Math.floor(10000+Math.random()*89999),type:T[type],co:g('co'),pr:$('#pi').selectedOptions[0].text,qty:g('qty'),gr:g('gr'),cn:g('cn'),st:g('st')};location.hash='/rfq-sent'}}
+function rfqSent(){const r=S.rfq;if(!r)return location.hash='/rfq/quote';$('#app').innerHTML=`<div class="wrap lead g"><small class="eye">${E(r.type)} submitted</small><h1>Reference ${r.ref}</h1><p>Simulated submission. Nothing was sent. In production, our team would reply to your business email.</p></div><div class="wrap" style="max-width:560px;padding-bottom:88px">${rows([['Company',E(r.co)],['Product',E(r.pr)],['Quantity',E(r.qty)+' kg'],['Grade',E(r.gr)],['Supply',E(r.st)],['Destination',E(r.cn)]])}<p style="margin-top:20px"><a class="btn green" href="#/ingredients">Back to ingredients</a></p></div>`}
+function info(t,p,items){$('#app').innerHTML=`<div class="wrap lead sm"><h1>${t}</h1><p>${p}</p></div><section class="edu" style="padding-top:0"><div class="wrap">${items.map(i=>`<a href="${i[2]}"><b>${i[0]}</b><span>${i[1]}</span></a>`).join('')}</div></section>`}
+const AL=(f)=>Object.keys(ART).filter(k=>ART[k][1].startsWith(f)).map(k=>[ART[k][0],ART[k][1],'#/a/'+k]);
+function nf(){$('#app').innerHTML='<div class="wrap lead"><h1>Page not found</h1><p style="margin-top:20px"><a class="btn gold" href="#/">Home</a></p></div>'}
+let route={p:[]};
+function render(){const h=location.hash.slice(1)||'/',[path,qs]=h.split('?');const p=path.split('/').filter(Boolean);route={p};const a=p[0];
+if(!a){$('#app').replaceChildren($('#t-home').content.cloneNode(true));const nf=$('#nf');nf.onsubmit=e=>{e.preventDefault();const v=$('#em').value.trim();$('#msg').textContent=/^\S+@\S+\.\S+$/.test(v)?'Subscribed (demo). Updates would go to '+v+'.':'Enter a valid email address, like name@example.com.'}}
+else if(a=='shop'){S.f={};shop(p[1])}else if(a=='search'){S.f={q:new URLSearchParams(qs).get('q')||''};shop('all')}else if(a=='p')pdp(p[1]);else if(a=='cart')cart();else if(a=='checkout')checkout();else if(a=='confirm')confirmP();else if(a=='wishlist')wl();else if(a=='account')account(p[1]);else if(a=='ingredients')ing(p[1]);else if(a=='i')ingd(p[1]);else if(a=='rfq')rfq(p[1],qs);else if(a=='rfq-sent')rfqSent();
+else if(a=='wholesale')info('Wholesale supply','Samples first, then bulk and recurring supply or custom sourcing.',[['Request samples','Test before volume','#/rfq/sample'],['Request quotation','Bulk and recurring supply','#/rfq/quote'],['Custom sourcing','Something not listed','#/rfq/sourcing']]);
+else if(a=='journal')info('Fragrance journal','Notes on choosing, wearing and understanding fragrance.',AL('Fragrance'));else if(a=='library')info('Ingredient library','Origins, extraction and raw materials.',AL('Ingredient'));else if(a=='resources')info('Technical resources','COA, SDS, GC-MS, specifications and storage.',AL('Technical'));
+else if(a=='a'&&ART[p[1]]){const r=ART[p[1]];$('#app').innerHTML=`<article class="wrap art"><small class="eye">${r[1]}</small><h1>${r[0]}</h1><p class="dc">${r[2]}</p><p>Demo editorial copy for the prototype.</p><p><a href="#/journal">← All articles</a></p></article>`}
+else if(a=='page'&&p[1]=='contact')rfq('quote','');else if(a=='page'&&p[1]=='quality')info('Quality standards','We only list products we can source and document.',[['Technical documents','COA, SDS, GC-MS shown per ingredient','#/ingredients'],['Shipping by product','Depends on product and destination','#/cart']]);else if(a=='page'&&p[1]=='about')$('#app').innerHTML='<div class="wrap lead"><h1>About Brandname</h1><p>A fragrance house and ingredients supplier. Placeholder copy: replace with your story.</p></div>';else nf();
+document.querySelector('header').classList.remove('open');$('#cur').value=S.cur;counts();scrollTo(0,0);$('#app').focus({preventScroll:true})}
+function init(){$('#mn').innerHTML=NAV.map(n=>`<div class="dd"><a href="#${n[1]}">${n[0]}</a><div class="menu">${n[2].map(l=>`<a href="#${l[1]}">${l[0]}</a>`).join('')}</div></div>`).join('');$('#cur').innerHTML=Object.keys(CUR).map(c=>`<option>${c}</option>`).join('');$('#cur').onchange=e=>setCur(e.target.value);$('#srch').onsubmit=e=>{e.preventDefault();location.hash='/search?q='+encodeURIComponent($('#sq').value)};$('#bg').onclick=()=>document.querySelector('header').classList.toggle('open');addEventListener('hashchange',render);render()}
+init();
+</script></body></html>
